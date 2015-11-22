@@ -1,5 +1,5 @@
-import test
+from DynatraceRecorderConverter import *
 
 if __name__ == '__main__':
-    a = test.JSONtoGSL("Business Banking Business ProcessJSON.json")
-    a.writeGSLFile()
+    DynatraceRecorderConverter.convertJSONFileToGSLFile(
+        "MINGP_Sparen_Tonen-spaargegevens.json", "MINGP_Sparen_Tonen-spaargegevens")
