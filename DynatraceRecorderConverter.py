@@ -90,11 +90,19 @@ class _JSONConverter(object):
             self.rootNode.append(configurationNode)
 
     def _createDeadlineNodesIter(self):
+        """Creates the <Param> nodes for the hard and soft deadline
+        configuration
+
+        Returns:
+            iterator
+        """
+        # deadlineNodes is empty tuple by default
         deadlineNodes = ()
         deadline = {
             "hardDeadline": "http://www.gomez.com/settings/hard_deadline",
             "softDeadline": "http://www.gomez.com/settings/soft_deadline"
         }
+        # Create <Param> iterator
         deadlineNodes = (etree.Element("Param", name="{}".format(pvalue), value="{}".format(self.jsonContents[key]))
                          for key, pvalue in deadline.items() if self.jsonContents.get(key) is not None)
         return deadlineNodes
@@ -176,7 +184,8 @@ class _JSONConverter(object):
         the client certifications
         """
         preScriptDict = {
-            "script": {"clientCerts": self.jsonContents["clientCerts"]}}
+            "script": {"clientCerts": self.jsonContents["clientCerts"]}
+        }
         preScriptEnc = base64.b64encode(
             json.dumps(preScriptDict, indent=4).encode("utf-8"))
         # Add the pre-script to the first <PageRequest> node
